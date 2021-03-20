@@ -15,8 +15,8 @@ exports.createData = async (req, res) => {
       labReportFileId: req.body.labReportFileId,
       labReportFileUrl: req.body.labReportFileUrl,
       prescription: req.body.prescription,
-      caseOpenDate: req.body.caseOpenDate,
-      caseCloseDate: req.body.caseCloseDate
+      caseStartDate: req.body.caseStartDate,
+      caseEndDate: req.body.caseEndDate
     });
     return data
       .save()

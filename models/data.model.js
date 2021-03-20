@@ -41,11 +41,11 @@ const DataSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    caseCloseDate: {
+    caseStartDate: {
         type: Date,
         // required: true
     },
-    caseOpenDate: {
+    caseEndDate: {
         type: Date,
         // required: true
     },
