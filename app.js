@@ -6,6 +6,8 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 const favicon = require('express-favicon');
 require('dotenv').config();
+const jwt = require('./_helper/jwt');
+// const errorHandler = require('./_helpers/error-handler');
 
 
 
@@ -33,42 +35,45 @@ app.use(function(req, res, next) {
     );
 next();
 });
-AdminBro.registerAdapter(AdminBroMongoose);
 
-const adminBro = new AdminBro({
-    rootPath: '/admin',
-    logoutPath: '/admin/logout',
-    loginPath: '/admin/login',
-    resources: [User, Data],
-    dashboard: {
-      handler: async () => {
-        return { some: 'output' }
-      },
-      component: AdminBro.bundle('./component/my-dashboard-component')
-    },
-    branding: {
-      logo:
-        'https://raw.githubusercontent.com/tuminzee/Logo/master/favicon.png',
-      favicon: 'https://raw.githubusercontent.com/tuminzee/Logo/master/favicon.png',
-          companyName: 'Sehat Intel',
-        softwareBrothers: false
-    }, 
-});
+// AdminBro.registerAdapter(AdminBroMongoose);
 
-const ADMIN = {
-    email: process.env.ADMIN_EMAIL,
-    password: process.env.ADMIN_PASSWORD,
-};
-const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
-    authenticate: async (email, password) => {
-        if (ADMIN.password === password && ADMIN.email === email) {
-        return ADMIN
-        }
-        return null
-    },
-    cookieName: 'adminbro',
-    cookiePassword: 'somePassword',
-});
+// const adminBro = new AdminBro({
+//     rootPath: '/admin',
+//     logoutPath: '/admin/logout',
+//     loginPath: '/admin/login',
+//     resources: [User, Data],
+//     dashboard: {
+//       handler: async () => {
+//         return { some: 'output' }
+//       },
+//       component: AdminBro.bundle('./component/my-dashboard-component')
+//     },
+//     branding: {
+//       logo:
+//         'https://res.cloudinary.com/imagecdntuminzee/image/upload/v1616488582/SehatIntel_ikbeuz.png',
+//       favicon: 'https://res.cloudinary.com/imagecdntuminzee/image/upload/v1616488582/SehatIntel_ikbeuz.png',
+//           companyName: 'Sehat Intel',
+//         softwareBrothers: false
+//     }, 
+// });
+
+// const ADMIN = {
+//     email: process.env.ADMIN_EMAIL,
+//     password: process.env.ADMIN_PASSWORD,
+// };
+// const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+//     authenticate: async (email, password) => {
+//         if (ADMIN.password === password && ADMIN.email === email) {
+//         return ADMIN
+//         }
+//         return null
+//     },
+//     cookieName: 'adminbro',
+//     cookiePassword: 'somePassword',
+// });
+
+
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
@@ -78,7 +83,7 @@ app.use(session({
 
 // const router = AdminBroExpress.buildRouter(adminBro);
 
-app.use(adminBro.options.rootPath, router);
+// app.use(adminBro.options.rootPath, router);
 
 
 
@@ -87,6 +92,8 @@ app.use(express.json({limit: '10mb'}));
 app.use(express.urlencoded({limit: '10mb', extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use(jwt());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

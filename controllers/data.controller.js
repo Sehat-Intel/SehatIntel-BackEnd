@@ -35,3 +35,17 @@ exports.createData = async (req, res) => {
         });
       });
   } 
+
+exports.getAllData = (req, res) => {
+  Data.find({})
+    .then((allData) => {
+      return res.status(200).json(allData.length);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: err.message,
+      });
+    });
+};
