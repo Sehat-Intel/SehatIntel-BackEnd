@@ -48,8 +48,8 @@ const adminBro = new AdminBro({
     },
     branding: {
       logo:
-        'https://raw.githubusercontent.com/tuminzee/Logo/master/favicon.png',
-      favicon: 'https://raw.githubusercontent.com/tuminzee/Logo/master/favicon.png',
+        'https://res.cloudinary.com/imagecdntuminzee/image/upload/v1616488582/SehatIntel_ikbeuz.png',
+      favicon: 'https://res.cloudinary.com/imagecdntuminzee/image/upload/v1616488582/SehatIntel_ikbeuz.png',
           companyName: 'Sehat Intel',
         softwareBrothers: false
     }, 
