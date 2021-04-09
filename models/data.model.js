@@ -25,6 +25,10 @@ const DataSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    phone: {
+        type: String,
+        required: true
+    },
     hospitalsName: {
         type: String,
         required: true
@@ -38,6 +42,10 @@ const DataSchema = new mongoose.Schema({
         required: true
     },
     labReportFileUrl: {
+        type: String,
+        required: true
+    },
+    labReportType: {
         type: String,
         required: true
     },
